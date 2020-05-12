@@ -1,0 +1,12 @@
+FileVersion = 1
+
+[Project]
+Name = "Ariyana_beef"
+TargetType = "BeefLib"
+StartupObject = "Ariyana_beef.Program"
+DefaultNamespace = "ari"
+
+[Configs.Debug.Win64]
+CLibType = "Static"
+LibPaths = ["$(ProjectDir)/dist/cari.lib"]
+PostBuildCmds = ["CopyToDependents(\"$(ProjectDir)/dist/*.dll\")"]

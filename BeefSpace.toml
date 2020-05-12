@@ -1,0 +1,5 @@
+FileVersion = 1
+Projects = {Ariyana_beef = {Path = "."}, t01Init = {Path = "tests/t01Init"}}
+
+[Workspace]
+StartupProject = "t01Init"

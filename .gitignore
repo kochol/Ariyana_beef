@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# Files
+BeefSpace_User.toml
+
+# Folders
+build
