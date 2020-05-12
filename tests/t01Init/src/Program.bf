@@ -1,4 +1,5 @@
 using System;
+using ari;
 
 namespace t01Init
 {
@@ -6,14 +7,11 @@ namespace t01Init
 	{
 		public static void Main()
 		{
-			var setup = scope ari.GfxSetup();
-			Console.WriteLine("w: {0}", setup.window.Width);
-			setup.window.Width = 640;
-			setup.window.Height = 480;
-			ari.Gfx.SetupGfx(setup);
-			while (true)
+			var setup = scope GfxSetup();
+			Gfx.SetupGfx(setup);
+			while (Io.Run())
 			{
-				System.Threading.Thread.Sleep(1000);
+				Io.UpdateIo();
 			}
 		}
 

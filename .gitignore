@@ -36,3 +36,4 @@ BeefSpace_User.toml
 
 # Folders
 build
+dist/copy_dll.bat
