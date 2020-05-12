@@ -7,12 +7,8 @@ namespace t01Init
 	{
 		public static void Main()
 		{
-			var setup = scope GfxSetup();
-			Gfx.SetupGfx(setup);
-			while (Io.Run())
-			{
-				Io.UpdateIo();
-			}
+			var app = scope GameApp();
+			RunApplication(app);
 		}
 
 	}
