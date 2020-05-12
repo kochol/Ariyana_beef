@@ -1,7 +1,22 @@
-namespace ari.en
+using System;
+
+namespace ari
 {
-	public class System
+	public class AriSystem
 	{
-		void* _obj;
+		[NoShow]
+		public void* _obj = null;
+
+		[CLink]
+		static extern void DeleteSystem(void* _obj);
+
+		public ~this()
+		{
+			if (_obj != null)
+			{
+				DeleteSystem(_obj);
+				_obj = null;
+			}
+		}
 	}
 }

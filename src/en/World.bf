@@ -15,6 +15,12 @@ namespace ari
 		[CLink]
 		static extern void UpdateWorld(void* _obj, float _elapsedTime);
 
+		[CLink]
+		static extern void AddSystemToWorld(void* _world, void* _system);
+
+		[CLink]
+		static extern EntityHandle CreateEntityWorld();
+
 		public this()
 		{
 			_obj = CreateWorld();
@@ -24,6 +30,16 @@ namespace ari
 		{
 			DeleteWorld(_obj);
 			_obj = null;
+		}
+
+		public void AddSystem(AriSystem pSystem)
+		{
+			AddSystemToWorld(_obj, pSystem._obj);
+		}
+
+		public EntityHandle CreateEntity()
+		{
+			return CreateEntityWorld();
 		}
 
 		public void Update(float _elapsedTime)
