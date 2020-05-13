@@ -9,7 +9,6 @@ namespace ari
 			// get the app setup configs
 			var setup = _app.GetGfxSetup();
 			Gfx.SetupGfx(setup);
-			delete setup;
 
 			// init the app
 			_app.OnInit();
@@ -20,19 +19,20 @@ namespace ari
 			// run the loop
 			while (Io.Run())
 			{
-				// update io threads
+				// update Io threads
 				Io.UpdateIo();
 
-				// calculate the elasped time
-				float elasped = (float)DateTime.Now.Subtract(last_time).TotalSeconds;
+				// calculate the elapsed time
+				float elapsed = (float)DateTime.Now.Subtract(last_time).TotalSeconds;
 				last_time = DateTime.Now;
 
 				// Update the app
-				_app.OnFrame(elasped);
+				_app.OnFrame(elapsed);
 			}
 
 			// clean up the app
 			_app.OnCleanup();
+			delete setup;
 		}
 	}
 
