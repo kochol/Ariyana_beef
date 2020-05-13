@@ -19,6 +19,14 @@ namespace ari
 
 		[CLink]
 		public static extern bool Run();
+
+		[CLink]
+		static extern void RegisterFileSystemLink(void* _obj, char8* _scheme);
+
+		public static void RegisterFileSystem(String _scheme, FileSystemBase _fs)
+		{
+			RegisterFileSystemLink(_fs.[Friend]_obj, _scheme);
+		}
 	}
 
 }

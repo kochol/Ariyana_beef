@@ -1,3 +1,4 @@
+using System;
 using ari;
 
 namespace t01Init
@@ -7,6 +8,7 @@ namespace t01Init
 		World _world = new World();
 		RenderSystem _renderSystem = new RenderSystem();
 		SceneSystem _sceneSystem = new SceneSystem();
+		FileSystemLocal _fs = new FileSystemLocal();
 		EntityHandle _entity;
 		BoxShape _box;
 		Camera _cam;
@@ -17,6 +19,8 @@ namespace t01Init
 			_world.AddSystem(_renderSystem);
 			_world.AddSystem(_sceneSystem);
 
+			Io.RegisterFileSystem("file", _fs);
+
 			_entity = World.CreateEntity();
 
 			_cam = World.CreateCamera();
@@ -25,6 +29,7 @@ namespace t01Init
 			_world.AddCamera(ref _entity, _cam);
 
 			_box = World.CreateBoxShape();
+			*_box.Texture = Gfx.LoadTexture("res:baboon.png");
 			_world.AddBoxShape(ref _entity, _box);
 		}
 
@@ -40,6 +45,7 @@ namespace t01Init
 			delete _world;
 			delete _renderSystem;
 			delete _sceneSystem;
+			delete _fs;
 			delete _box;
 			delete _cam;
 		}

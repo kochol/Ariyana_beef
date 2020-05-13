@@ -8,5 +8,6 @@ DefaultNamespace = "ari"
 
 [Configs.Debug.Win64]
 CLibType = "Static"
+BeefLibType = "DynamicDebug"
 LibPaths = ["$(ProjectDir)/dist/cari.lib"]
 PostBuildCmds = ["CopyToDependents(\"$(ProjectDir)/dist/*.dll\")"]
