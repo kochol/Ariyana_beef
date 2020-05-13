@@ -7,8 +7,7 @@ namespace ari
 		public static void RunApplication(Application _app)
 		{
 			// get the app setup configs
-			var setup = _app.GetGfxSetup();
-			Gfx.SetupGfx(setup);
+			Gfx.SetupGfx(_app.GetGfxSetup());
 
 			// init the app
 			_app.OnInit();
@@ -32,15 +31,18 @@ namespace ari
 
 			// clean up the app
 			_app.OnCleanup();
-			delete setup;
 		}
 	}
 
 	public class Application
 	{
+		protected GfxSetup* setup = null;
+
 		public virtual GfxSetup* GetGfxSetup()
 		{
-			return new GfxSetup();
+			if (setup == null)
+				setup = new GfxSetup();
+			return setup;
 		}
 
 		public virtual void OnInit()
@@ -55,7 +57,7 @@ namespace ari
 
 		public virtual void OnCleanup()
 		{
-
+			delete setup;
 		}
 
 		public virtual void OnEvent()
