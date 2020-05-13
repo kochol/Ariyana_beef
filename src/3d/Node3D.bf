@@ -21,7 +21,7 @@ namespace ari
 		}
 	}
 
-	public class Node3D
+	public class Node3D	: Node
 	{
 		public Vector3* Position;
 		public Quat* Rotation;
@@ -30,7 +30,7 @@ namespace ari
 		protected Node3dHandle handle;
 
 		// Constructor
-		public this(Node3dHandle _handle)
+		public this(Node3dHandle _handle) : base(_handle._obj)
 		{
 			this.handle = _handle;
 		}
