@@ -25,15 +25,15 @@ namespace ari
 	{
 		public Vector3* Position;
 
-		public Node3dHandle handle;
-
-		[CLink]
-		static extern Vector3* GetNode3dPosition(void* _node);
+		protected Node3dHandle handle;
 
 		public this(Node3dHandle _handle)
 		{
 			this.handle = _handle;
 		}
+
+		[CLink]
+		static extern Vector3* GetNode3dPosition(void* _node);
 
 		public virtual void Init()
 		{

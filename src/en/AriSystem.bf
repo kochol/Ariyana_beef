@@ -4,8 +4,7 @@ namespace ari
 {
 	public class AriSystem
 	{
-		[NoShow]
-		public void* _obj = null;
+		protected void* _obj = null;
 
 		[CLink]
 		static extern void DeleteSystem(void* _obj);

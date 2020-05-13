@@ -28,7 +28,7 @@ namespace ari
 
 		public void AddSystem(AriSystem pSystem)
 		{
-			AddSystemToWorld(_obj, pSystem._obj);
+			AddSystemToWorld(_obj, pSystem.[Friend]_obj);
 		}
 
 		[CLink]
@@ -54,7 +54,7 @@ namespace ari
 
 		public void AddCamera(ref EntityHandle _entity, Camera _camera)
 		{
-			AddCameraToWorld(_obj, ref _entity, _camera.handle);
+			AddCameraToWorld(_obj, ref _entity, _camera.[Friend]handle);
 		}
 
 		[CLink]
@@ -72,7 +72,7 @@ namespace ari
 
 		public void AddBoxShape(ref EntityHandle _entity, BoxShape _box)
 		{
-			AddBoxShapeToWorld(_obj, ref _entity, _box.handle);
+			AddBoxShapeToWorld(_obj, ref _entity, _box.[Friend]handle);
 		}
 
 		[CLink]
