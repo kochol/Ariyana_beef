@@ -45,7 +45,7 @@ namespace ari
 		public static Camera CreateCamera()
 		{
 			var cam = new Camera(CreateCameraComponent());
-			cam.Init();
+			cam.[Friend]Init();
 			return cam;
 		}
 
@@ -63,7 +63,7 @@ namespace ari
 		public static BoxShape CreateBoxShape()
 		{
 			var boxshape = new BoxShape(CreateBoxShapeComponent());
-			boxshape.Init();
+			boxshape.[Friend]Init();
 			return boxshape;
 		}
 

@@ -9,4 +9,13 @@ namespace ari
 		public float y;
 		public float z;
 	}
+
+	[CRepr]
+	public struct Quat
+	{
+		public float x;
+		public float y;
+		public float z;
+		public float w;
+	}
 }

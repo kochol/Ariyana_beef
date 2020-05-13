@@ -3,7 +3,7 @@ using System;
 namespace ari
 {
 	[CRepr]
-	public struct Node3dHandle
+	struct Node3dHandle
 	{	
 		public uint32 Handle = uint32.MaxValue;
 		public uint32 Index = uint32.MaxValue;
@@ -24,21 +24,36 @@ namespace ari
 	public class Node3D
 	{
 		public Vector3* Position;
+		public Quat* Rotation;
+		public Vector3* Scale;
 
 		protected Node3dHandle handle;
 
+		// Constructor
 		public this(Node3dHandle _handle)
 		{
 			this.handle = _handle;
 		}
 
-		[CLink]
-		static extern Vector3* GetNode3dPosition(void* _node);
+		[CRepr]
+		struct Node3dMembers
+		{
+			public Vector3* Position;
+			public Quat* Rotation;
+			public Vector3* Scale;
+		}
 
-		public virtual void Init()
+		[CLink]
+		static extern Node3dMembers GetNode3dMembers(void* _node);
+
+		// Init the members
+		protected virtual void Init()
 		{
 			Runtime.Assert(handle._obj != null);
-			Position = GetNode3dPosition(handle._obj);
+			var m = GetNode3dMembers(handle._obj);
+			Position = m.Position;
+			Rotation = m.Rotation;
+			Scale = m.Scale;
 		}
 	}
 }

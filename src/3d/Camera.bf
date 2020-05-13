@@ -14,7 +14,7 @@ namespace ari
 		[CLink]
 		static extern Vector3* GetCameraTarget(void* _node);
 
-		public override void Init()
+		protected override void Init()
 		{
 			base.Init();
 			Target = GetCameraTarget(handle._obj);
