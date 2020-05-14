@@ -4,8 +4,15 @@ namespace ari
 {
 	static
 	{
+		[CLink]
+		static extern uint32* GetFrameNumberPointer();
+
+		static uint32* FrameNumber;
+
 		public static void RunApplication(Application _app)
 		{
+			FrameNumber = GetFrameNumberPointer();
+
 			// get the app setup configs
 			Gfx.SetupGfx(_app.GetGfxSetup());
 
@@ -18,6 +25,8 @@ namespace ari
 			// run the loop
 			while (Io.Run())
 			{
+				*FrameNumber += 1;
+
 				// update Io threads
 				Io.UpdateIo();
 
