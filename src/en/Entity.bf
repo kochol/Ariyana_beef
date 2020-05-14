@@ -22,5 +22,13 @@ namespace ari
 
 	public class Entity
 	{
+		public bool* Replicates;
+		public EntityHandle Handle;
+
+		protected this(EntityHandle _handle)
+		{
+			Handle = _handle;
+
+		}
 	}
 }

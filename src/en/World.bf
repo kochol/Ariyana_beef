@@ -34,9 +34,14 @@ namespace ari
 		[CLink]
 		static extern EntityHandle CreateEntityWorld();
 
-		public static EntityHandle CreateEntity()
+		[CLink]
+		static extern bool* GetEntityMembers(ref EntityHandle _entity);
+
+		public static Entity CreateEntity()
 		{
-			return CreateEntityWorld();
+			var e = new [Friend]Entity(CreateEntityWorld());
+			e.Replicates = GetEntityMembers(ref e.Handle);
+			return e;
 		}
 
 		[CLink]
@@ -52,9 +57,9 @@ namespace ari
 		[CLink]
 		static extern void AddCameraToWorld(void* _world, ref EntityHandle _entity, Node3dHandle _camera);
 
-		public void AddCamera(ref EntityHandle _entity, Camera _camera)
+		public void AddCamera(Entity _entity, Camera _camera)
 		{
-			AddCameraToWorld(_obj, ref _entity, _camera.[Friend]handle);
+			AddCameraToWorld(_obj, ref _entity.Handle, _camera.[Friend]handle);
 		}
 
 		[CLink]
@@ -70,9 +75,9 @@ namespace ari
 		[CLink]
 		static extern void AddBoxShapeToWorld(void* _world, ref EntityHandle _entity, Node3dHandle _camera);
 
-		public void AddBoxShape(ref EntityHandle _entity, BoxShape _box)
+		public void AddBoxShape(Entity _entity, BoxShape _box)
 		{
-			AddBoxShapeToWorld(_obj, ref _entity, _box.[Friend]handle);
+			AddBoxShapeToWorld(_obj, ref _entity.Handle, _box.[Friend]handle);
 		}
 
 		[CLink]
