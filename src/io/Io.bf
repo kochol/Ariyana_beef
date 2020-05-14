@@ -28,6 +28,9 @@ namespace ari
 		public static extern bool Run();
 
 		[CLink]
+		public static extern WindowHandle CreateAriWindow(ref WindowSetup _setup, char8* _title);
+
+		[CLink]
 		static extern void RegisterFileSystemLink(void* _obj, char8* _scheme);
 
 		public static void RegisterFileSystem(String _scheme, FileSystemBase _fs)
