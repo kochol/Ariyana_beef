@@ -32,6 +32,14 @@ namespace ari
 		}
 
 		[CLink]
+		static extern void AddEntityToWorld(void* _world, ref EntityHandle _entity);
+
+		public void AddEntity(Entity _entity)
+		{
+			AddEntityToWorld(_obj, ref _entity.Handle);
+		}
+
+		[CLink]
 		static extern EntityHandle CreateEntityWorld();
 
 		[CLink]

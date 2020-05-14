@@ -37,7 +37,7 @@ namespace ari
 	    ARI_EVENTTYPE_UPDATE_CURSOR,
 	    ARI_EVENTTYPE_QUIT_REQUESTED,
 	    _ARI_EVENTTYPE_NUM,
-	    _ARI_EVENTTYPE_FORCE_U32 = 0x7FFFFFF
+	    _ARI_EVENTTYPE_FORCE_U32 = 0x07FFFFFF
 	}
 
 	/* key codes are the same names and values as GLFW */
