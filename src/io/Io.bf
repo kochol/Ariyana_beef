@@ -12,6 +12,13 @@ namespace ari
 		public float DpiScale = 1.0f;
 	}
 
+	[CRepr]
+	public struct WindowHandle
+	{
+		public uint32 Handle = uint32.MaxValue;
+		public uint32 Index = uint32.MinValue;
+	}
+
 	public static class Io
 	{
 		[CLink]

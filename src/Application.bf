@@ -2,16 +2,31 @@ using System;
 
 namespace ari
 {
+
+	function void OnEventCB(ari_event* _event, ref WindowHandle _handle);
+
 	static
 	{
 		[CLink]
 		static extern uint64* GetFrameNumberPointer();
 
+
+		[CLink]
+		static extern void SetOnEventCallBack(OnEventCB _event_cb);
+
 		static uint64* FrameNumber;
+
+		static Application g_app;
+
+		public static void OnEvent(ari_event* _event, ref WindowHandle _handle)
+		{
+			g_app.OnEvent(_event, ref _handle);
+		}
 
 		public static void RunApplication(Application _app)
 		{
 			FrameNumber = GetFrameNumberPointer();
+			g_app = _app;
 
 			// get the app setup configs
 			Gfx.SetupGfx(_app.GetGfxSetup());
@@ -21,6 +36,9 @@ namespace ari
 
 			// get time
 			var last_time = DateTime.Now;
+
+			// bind on event
+			SetOnEventCallBack(=> OnEvent);
 
 			// run the loop
 			while (Io.Run())
@@ -69,7 +87,7 @@ namespace ari
 			delete setup;
 		}
 
-		public virtual void OnEvent()
+		public virtual void OnEvent(ari_event* _event, ref WindowHandle _handle)
 		{
 
 		}
