@@ -5,9 +5,9 @@ namespace ari
 	static
 	{
 		[CLink]
-		static extern uint32* GetFrameNumberPointer();
+		static extern uint64* GetFrameNumberPointer();
 
-		static uint32* FrameNumber;
+		static uint64* FrameNumber;
 
 		public static void RunApplication(Application _app)
 		{
