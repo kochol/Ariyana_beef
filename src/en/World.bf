@@ -6,6 +6,7 @@ namespace ari
 	{
 		void* _obj = null;
 
+		// Constructor
 		[CLink]
 		static extern void* CreateWorld();
 
@@ -14,6 +15,7 @@ namespace ari
 			_obj = CreateWorld();
 		}
 
+		// Destructor
 		[CLink]
 		static extern void DeleteWorld(void* _obj);
 
@@ -23,6 +25,7 @@ namespace ari
 			_obj = null;
 		}
 
+		// Add system
 		[CLink]
 		static extern void AddSystemToWorld(void* _world, void* _system);
 
@@ -65,7 +68,7 @@ namespace ari
 		[CLink]
 		static extern void AddCameraToWorld(void* _world, ref EntityHandle _entity, Node3dHandle _camera);
 
-		public void AddCamera(Entity _entity, Camera _camera)
+		public void AddComponent(Entity _entity, Camera _camera)
 		{
 			AddCameraToWorld(_obj, ref _entity.Handle, _camera.[Friend]handle);
 		}
@@ -83,9 +86,25 @@ namespace ari
 		[CLink]
 		static extern void AddBoxShapeToWorld(void* _world, ref EntityHandle _entity, Node3dHandle _camera);
 
-		public void AddBoxShape(Entity _entity, BoxShape _box)
+		public void AddComponent(Entity _entity, BoxShape _box)
 		{
 			AddBoxShapeToWorld(_obj, ref _entity.Handle, _box.[Friend]handle);
+		}
+
+		[CLink]
+		static extern PropertyReplicatorHandle CreatePropertyReplicatorComponent();
+
+		public static PropertyReplicator CreatePropertyReplicator()
+		{
+			return new PropertyReplicator(CreatePropertyReplicatorComponent());
+		}
+
+		[CLink]
+		static extern void AddPropertyReplicatorToWorld(void* _world, ref EntityHandle _entity, ref PropertyReplicatorHandle _cmp);
+
+		public void AddComponent(Entity _entity, PropertyReplicator _pr)
+		{
+			AddPropertyReplicatorToWorld(_obj, ref _entity.Handle, ref _pr.[Friend]handle);
 		}
 
 		[CLink]

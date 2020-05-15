@@ -26,11 +26,11 @@ namespace t01Init
 			_cam = World.CreateCamera();
 			_cam.Position.x = _cam.Position.y = _cam.Position.z = 3.0f;
 			_cam.Target.z = 0.0f;
-			_world.AddCamera(_entity, _cam);
+			_world.AddComponent(_entity, _cam);
 
 			_box = World.CreateBoxShape();
 			*_box.Texture = Gfx.LoadTexture("res:baboon.png");
-			_world.AddBoxShape(_entity, _box);
+			_world.AddComponent(_entity, _box);
 		}
 
 		public override void OnFrame(float _elapsedTime)

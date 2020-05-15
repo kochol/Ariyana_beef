@@ -10,7 +10,7 @@ namespace ari
 		public void* _obj = null;
 
 		[CLink]
-		static extern bool IsValidNode3D(ref uint32 _cameraHandle);
+		static extern bool IsValidNode3D(ref uint32 _handle);
 
 		bool IsValid() mut
 		{
