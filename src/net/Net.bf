@@ -32,14 +32,14 @@ namespace ari
 		static bool SerializeRPC(void* _stream, void* _rpc)
 		{
 			RPC rpc = (RPC)Internal.UnsafeCastToObject(_rpc);
-			NetSerializer.Serialize(_stream, ref rpc.function_hash);
+			NetSerializer.Serialize(_stream, &rpc.function_hash);
 			return rpc.Serialize(_stream);
 		}
 
 		static bool SerializeMeasureRPC(void* _stream, void* _rpc)
 		{
 			RPC rpc = (RPC)Internal.UnsafeCastToObject(_rpc);
-			NetSerializer.SerializeMeasure(_stream, ref rpc.function_hash);
+			NetSerializer.SerializeMeasure(_stream, &rpc.function_hash);
 			return rpc.SerializeMeasure(_stream);
 		}
 
@@ -50,7 +50,7 @@ namespace ari
 			_index = g_rpc_index;
 			g_rpc_index++;
 
-			NetSerializer.Deserialize(_stream, ref rpc_hash);
+			NetSerializer.Deserialize(_stream, &rpc_hash);
 
 			if (!g_dRpcs.ContainsKey(rpc_hash))
 				return false;
