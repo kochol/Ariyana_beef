@@ -1,3 +1,4 @@
+using System;
 using ari;
 
 namespace t02Network
@@ -12,6 +13,12 @@ namespace t02Network
 		Camera m_cam;
 		BoxShape m_box;
 		PropertyReplicator m_pr;
+		RPC m_rpc_test;
+
+		static void RpcTest()
+		{
+			Console.WriteLine("RPC Test works!");
+		}
 
 		public override void OnInit()
 		{
@@ -48,6 +55,9 @@ namespace t02Network
 
 			// At last add entity to world
 			m_world.AddEntity(m_entity);
+
+			// Add RPCs
+			m_rpc_test = Net.AddRPC("RpcTest", RpcType.MultiCast, new => RpcTest);
 		}
 
 		public override void OnFrame(float _elapsedTime)
@@ -61,6 +71,10 @@ namespace t02Network
 		public override void OnEvent(ari_event* _event, ref WindowHandle _handle)
 		{
 			base.OnEvent(_event, ref _handle);
+			if (_event.type == ari_event_type.ARI_EVENTTYPE_KEY_UP)
+			{
+				m_serverSystem.CallRPC(m_rpc_test); // Multicast test
+			}
 		}
 
 		public override void OnCleanup()

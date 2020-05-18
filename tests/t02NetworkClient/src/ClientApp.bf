@@ -1,3 +1,4 @@
+using System;
 using ari;
 
 namespace t02Network
@@ -8,6 +9,13 @@ namespace t02Network
 		RenderSystem m_renderSystem = new RenderSystem();
 		SceneSystem m_sceneSystem = new SceneSystem();
 		ClientSystem m_clientSystem = new ClientSystem();
+
+		RPC m_rpc_test;
+
+		static void RpcTest()
+		{
+			Console.WriteLine("RPC Test works!");
+		}
 
 		public override void OnInit()
 		{
@@ -21,7 +29,11 @@ namespace t02Network
 			m_world.AddSystem(m_sceneSystem);
 			m_world.AddSystem(m_clientSystem);
 
+			// Connect to the server
 			m_clientSystem.Connect("127.0.0.1", 55223);
+
+			// Add RPCs
+			m_rpc_test = Net.AddRPC("RpcTest", RpcType.MultiCast, new => RpcTest);
 		}
 
 		public override void OnFrame(float _elapsedTime)

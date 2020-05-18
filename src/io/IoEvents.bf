@@ -14,7 +14,7 @@ namespace ari
 		public const int ARI_MODIFIER_SUPER = (1<<3);
 	}
 
-	enum ari_event_type {
+	public enum ari_event_type {
 	    ARI_EVENTTYPE_INVALID,
 	    ARI_EVENTTYPE_KEY_DOWN,
 	    ARI_EVENTTYPE_KEY_UP,
@@ -41,7 +41,7 @@ namespace ari
 	}
 
 	/* key codes are the same names and values as GLFW */
-	enum ari_keycode {
+	public enum ari_keycode {
 	    ARI_KEYCODE_INVALID          = 0,
 	    ARI_KEYCODE_SPACE            = 32,
 	    ARI_KEYCODE_APOSTROPHE       = 39,  /* ' */
@@ -166,15 +166,15 @@ namespace ari
 	}
 
 	[CRepr]
-	struct ari_touchpoint
+	public struct ari_touchpoint
 	{
-	    void* identifier = null;
-	    float pos_x = 0.0f;
-	    float pos_y = 0.0f;
-	    bool changed = false;
+	    public void* identifier = null;
+	    public float pos_x = 0.0f;
+	    public float pos_y = 0.0f;
+	    public bool changed = false;
 	}
 
-	enum ari_mousebutton {
+	public enum ari_mousebutton {
 	    ARI_MOUSEBUTTON_INVALID = -1,
 	    ARI_MOUSEBUTTON_LEFT = 0,
 	    ARI_MOUSEBUTTON_RIGHT = 1,
@@ -182,24 +182,24 @@ namespace ari
 	} 
 
 	[CRepr]
-	struct ari_event
+	public struct ari_event
 	{
-	    uint64 frame_count = 0;
-	    ari_event_type type = ari_event_type.ARI_EVENTTYPE_INVALID;
-	    ari_keycode key_code = ari_keycode.ARI_KEYCODE_INVALID;
-	    uint32 char_code = 0;
-	    bool key_repeat = false;
-	    uint32 modifiers = 0;
-	    ari_mousebutton mouse_button = ari_mousebutton.ARI_MOUSEBUTTON_INVALID;
-	    float mouse_x = 0.0f;
-	    float mouse_y = 0.0f;
-	    float scroll_x = 0.0f;
-	    float scroll_y = 0.0f;
-	    int num_touches = 0;
-	    ari_touchpoint[ARI_MAX_TOUCHPOINTS] touches = .(.(), .(), .(), .(), .(), .(), .(), .());
-	    int window_width = 0;
-	    int window_height = 0;
-	    int framebuffer_width = 0;
-	    int framebuffer_height = 0;
+	    public uint64 frame_count = 0;
+	    public ari_event_type type = ari_event_type.ARI_EVENTTYPE_INVALID;
+	    public ari_keycode key_code = ari_keycode.ARI_KEYCODE_INVALID;
+	    public uint32 char_code = 0;
+	    public bool key_repeat = false;
+	    public uint32 modifiers = 0;
+	    public ari_mousebutton mouse_button = ari_mousebutton.ARI_MOUSEBUTTON_INVALID;
+	    public float mouse_x = 0.0f;
+	    public float mouse_y = 0.0f;
+	    public float scroll_x = 0.0f;
+	    public float scroll_y = 0.0f;
+	    public int num_touches = 0;
+	    public ari_touchpoint[ARI_MAX_TOUCHPOINTS] touches = .(.(), .(), .(), .(), .(), .(), .(), .());
+	    public int window_width = 0;
+	    public int window_height = 0;
+	    public int framebuffer_width = 0;
+	    public int framebuffer_height = 0;
 	}
 }
