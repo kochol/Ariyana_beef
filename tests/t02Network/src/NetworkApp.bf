@@ -83,7 +83,7 @@ namespace t02Network
 			if (_event.type == ari_event_type.ARI_EVENTTYPE_KEY_UP)
 			{
 				m_serverSystem.CallRPC(m_rpc_test); // Multicast test
-				//m_serverSystem.CallRPC(m_rpc_test2, test_i++); // Multicast test 2
+				m_serverSystem.CallRPC(m_rpc_test2, test_i++); // Multicast test 2
 			}
 		}
 
