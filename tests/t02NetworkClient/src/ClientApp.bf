@@ -11,10 +11,16 @@ namespace t02Network
 		ClientSystem m_clientSystem = new ClientSystem();
 
 		RPC m_rpc_test;
+		RPC m_rpc_test2;
 
 		static void RpcTest()
 		{
 			Console.WriteLine("RPC Test works!");
+		}
+
+		static void RpcTest2(int i)
+		{
+			Console.WriteLine("RPC Test works! {}", i);
 		}
 
 		public override void OnInit()
@@ -34,6 +40,7 @@ namespace t02Network
 
 			// Add RPCs
 			m_rpc_test = Net.AddRPC("RpcTest", RpcType.MultiCast, new => RpcTest);
+			m_rpc_test2 = Net.AddRPC<int>("RpcTest2", .MultiCast, new => RpcTest2);
 		}
 
 		public override void OnFrame(float _elapsedTime)

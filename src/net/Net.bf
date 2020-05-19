@@ -32,14 +32,14 @@ namespace ari
 		static bool SerializeRPC(void* _stream, void* _rpc)
 		{
 			RPC rpc = (RPC)Internal.UnsafeCastToObject(_rpc);
-			NetSerializer.Serialize(_stream, &rpc.function_hash);
+			NetSerializer.Serialize(_stream, rpc.function_hash);
 			return rpc.Serialize(_stream);
 		}
 
 		static bool SerializeMeasureRPC(void* _stream, void* _rpc)
 		{
 			RPC rpc = (RPC)Internal.UnsafeCastToObject(_rpc);
-			NetSerializer.SerializeMeasure(_stream, &rpc.function_hash);
+			NetSerializer.SerializeMeasure(_stream, rpc.function_hash);
 			return rpc.SerializeMeasure(_stream);
 		}
 
@@ -50,7 +50,7 @@ namespace ari
 			_index = g_rpc_index;
 			g_rpc_index++;
 
-			NetSerializer.Deserialize(_stream, &rpc_hash);
+			NetSerializer.Deserialize(_stream, ref rpc_hash);
 
 			if (!g_dRpcs.ContainsKey(rpc_hash))
 				return false;
@@ -58,7 +58,10 @@ namespace ari
 			RPC orig_rpc = g_dRpcs[rpc_hash];
 			RPC rpc = orig_rpc.Clone();
 			if (!rpc.Deserialize(_stream))
+			{
+				delete rpc;
 				return false;
+			}
 
 			g_aRpcs.Add(_index, rpc);
 			return true;
@@ -112,5 +115,18 @@ namespace ari
 			return rpc;
 		}
 
+		public static RPC AddRPC<P1>(String _function_name, RpcType _rpc_type, RPC1<P1>.fnDel _fn, bool _reliable = false)
+		{
+			RPC1<P1> rpc = new RPC1<P1>();
+			rpc.fn = _fn;
+			rpc.function_hash = Hash.HashStringFNV32(_function_name);
+			rpc.function_name = _function_name;
+			rpc.rpc_type = _rpc_type;
+			rpc.Reliable = _reliable;
+
+			g_dRpcs.Add(rpc.function_hash, rpc);
+
+			return rpc;
+		}
 	}
 }

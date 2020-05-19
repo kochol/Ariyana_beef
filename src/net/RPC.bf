@@ -87,7 +87,7 @@ namespace ari
 
 		public override bool Deserialize(void* stream)
 		{
-			return NetSerializer.Deserialize<P1>(stream, p1);
+			return NetSerializer.Deserialize<P1>(stream, ref p1);
 		}
 
 		public override bool SerializeMeasure(void* stream)

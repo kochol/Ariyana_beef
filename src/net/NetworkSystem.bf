@@ -47,5 +47,18 @@ namespace ari
 			CallRPC_internal(_rpc, client_index);
 		}
 
-	}
+		public void CallRPC<P1>(RPC _rpc, P1 p1)
+		{
+			var c1 = p1;
+			_rpc.SetParam1(&c1);
+			CallRPC_internal(_rpc);
+		}
+
+		public void CallRPC<P1>(int client_index, RPC _rpc, P1 p1)
+		{
+			var c1 = p1;
+			_rpc.SetParam1(&c1);
+			CallRPC_internal(_rpc, client_index);
+		}
+}
 }

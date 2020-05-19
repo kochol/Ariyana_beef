@@ -14,11 +14,19 @@ namespace t02Network
 		BoxShape m_box;
 		PropertyReplicator m_pr;
 		RPC m_rpc_test;
+		RPC m_rpc_test2;
 
 		static void RpcTest()
 		{
 			Console.WriteLine("RPC Test works!");
 		}
+
+		static void RpcTest2(int i)
+		{
+			Console.WriteLine("RPC Test works! {}", i);
+		}
+
+		static int test_i = 0;
 
 		public override void OnInit()
 		{
@@ -57,7 +65,8 @@ namespace t02Network
 			m_world.AddEntity(m_entity);
 
 			// Add RPCs
-			m_rpc_test = Net.AddRPC("RpcTest", RpcType.MultiCast, new => RpcTest);
+			m_rpc_test = Net.AddRPC("RpcTest", .MultiCast, new => RpcTest);
+			m_rpc_test2 = Net.AddRPC<int>("RpcTest2", .MultiCast, new => RpcTest2);
 		}
 
 		public override void OnFrame(float _elapsedTime)
@@ -74,6 +83,7 @@ namespace t02Network
 			if (_event.type == ari_event_type.ARI_EVENTTYPE_KEY_UP)
 			{
 				m_serverSystem.CallRPC(m_rpc_test); // Multicast test
+				//m_serverSystem.CallRPC(m_rpc_test2, test_i++); // Multicast test 2
 			}
 		}
 
