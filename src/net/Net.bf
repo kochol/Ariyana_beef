@@ -128,5 +128,118 @@ namespace ari
 
 			return rpc;
 		}
+
+
+		public static RPC AddRPC<P1, P2>(String _function_name, RpcType _rpc_type, RPC2<P1, P2>.fnDel _fn, bool _reliable = false)
+		{
+			RPC2<P1, P2> rpc = new RPC2<P1, P2>();
+			rpc.fn = _fn;
+			rpc.function_hash = Hash.HashStringFNV32(_function_name);
+			rpc.function_name = _function_name;
+			rpc.rpc_type = _rpc_type;
+			rpc.Reliable = _reliable;
+
+			g_dRpcs.Add(rpc.function_hash, rpc);
+
+			return rpc;
+		}
+
+		public static RPC AddRPC<P1, P2, P3>(String _function_name, RpcType _rpc_type, RPC3<P1, P2, P3>.fnDel _fn, bool _reliable = false)
+		{
+			RPC3<P1, P2, P3> rpc = new RPC3<P1, P2, P3>();
+			rpc.fn = _fn;
+			rpc.function_hash = Hash.HashStringFNV32(_function_name);
+			rpc.function_name = _function_name;
+			rpc.rpc_type = _rpc_type;
+			rpc.Reliable = _reliable;
+
+			g_dRpcs.Add(rpc.function_hash, rpc);
+
+			return rpc;
+		}
+
+		public static RPC AddRPC<P1, P2, P3, P4>(String _function_name, RpcType _rpc_type, RPC4<P1, P2, P3, P4>.fnDel _fn, bool _reliable = false)
+		{
+			RPC4<P1, P2, P3, P4> rpc = new RPC4<P1, P2, P3, P4>();
+			rpc.fn = _fn;
+			rpc.function_hash = Hash.HashStringFNV32(_function_name);
+			rpc.function_name = _function_name;
+			rpc.rpc_type = _rpc_type;
+			rpc.Reliable = _reliable;
+
+			g_dRpcs.Add(rpc.function_hash, rpc);
+
+			return rpc;
+		}
+
+		public static RPC AddRPC<P1, P2, P3, P4, P5>(String _function_name, RpcType _rpc_type, RPC5<P1, P2, P3, P4, P5>.fnDel _fn, bool _reliable = false)
+		{
+			RPC5<P1, P2, P3, P4, P5> rpc = new RPC5<P1, P2, P3, P4, P5>();
+			rpc.fn = _fn;
+			rpc.function_hash = Hash.HashStringFNV32(_function_name);
+			rpc.function_name = _function_name;
+			rpc.rpc_type = _rpc_type;
+			rpc.Reliable = _reliable;
+
+			g_dRpcs.Add(rpc.function_hash, rpc);
+
+			return rpc;
+		}
+
+		public static RPC AddRPC<P1, P2, P3, P4, P5, P6>(String _function_name, RpcType _rpc_type, RPC6<P1, P2, P3, P4, P5, P6>.fnDel _fn, bool _reliable = false)
+		{
+			RPC6<P1, P2, P3, P4, P5, P6> rpc = new RPC6<P1, P2, P3, P4, P5, P6>();
+			rpc.fn = _fn;
+			rpc.function_hash = Hash.HashStringFNV32(_function_name);
+			rpc.function_name = _function_name;
+			rpc.rpc_type = _rpc_type;
+			rpc.Reliable = _reliable;
+
+			g_dRpcs.Add(rpc.function_hash, rpc);
+
+			return rpc;
+		}
+
+		public static RPC AddRPC<P1, P2, P3, P4, P5, P6, P7>(String _function_name, RpcType _rpc_type, RPC7<P1, P2, P3, P4, P5, P6, P7>.fnDel _fn, bool _reliable = false)
+		{
+			RPC7<P1, P2, P3, P4, P5, P6, P7> rpc = new RPC7<P1, P2, P3, P4, P5, P6, P7>();
+			rpc.fn = _fn;
+			rpc.function_hash = Hash.HashStringFNV32(_function_name);
+			rpc.function_name = _function_name;
+			rpc.rpc_type = _rpc_type;
+			rpc.Reliable = _reliable;
+
+			g_dRpcs.Add(rpc.function_hash, rpc);
+
+			return rpc;
+		}
+
+		public static RPC AddRPC<P1, P2, P3, P4, P5, P6, P7, P8>(String _function_name, RpcType _rpc_type, RPC8<P1, P2, P3, P4, P5, P6, P7, P8>.fnDel _fn, bool _reliable = false)
+		{
+			RPC8<P1, P2, P3, P4, P5, P6, P7, P8> rpc = new RPC8<P1, P2, P3, P4, P5, P6, P7, P8>();
+			rpc.fn = _fn;
+			rpc.function_hash = Hash.HashStringFNV32(_function_name);
+			rpc.function_name = _function_name;
+			rpc.rpc_type = _rpc_type;
+			rpc.Reliable = _reliable;
+
+			g_dRpcs.Add(rpc.function_hash, rpc);
+
+			return rpc;
+		}
+
+		public static RPC AddRPC<P1, P2, P3, P4, P5, P6, P7, P8, P9>(String _function_name, RpcType _rpc_type, RPC9<P1, P2, P3, P4, P5, P6, P7, P8, P9>.fnDel _fn, bool _reliable = false)
+		{
+			RPC9<P1, P2, P3, P4, P5, P6, P7, P8, P9> rpc = new RPC9<P1, P2, P3, P4, P5, P6, P7, P8, P9>();
+			rpc.fn = _fn;
+			rpc.function_hash = Hash.HashStringFNV32(_function_name);
+			rpc.function_name = _function_name;
+			rpc.rpc_type = _rpc_type;
+			rpc.Reliable = _reliable;
+
+			g_dRpcs.Add(rpc.function_hash, rpc);
+
+			return rpc;
+		}
 	}
 }
