@@ -3,6 +3,24 @@ using System;
 namespace ari
 {
 	[CRepr]
+	public struct Vector2
+	{
+		public float x;
+		public float y;
+
+		public void Set(float _x, float _y) mut
+		{
+			x = _x;
+			y = _y;
+		}
+
+		public void Set(float _v) mut
+		{
+			x = y = _v;
+		}
+	}
+
+	[CRepr]
 	public struct Vector3
 	{
 		public float x;

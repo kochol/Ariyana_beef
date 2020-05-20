@@ -2,7 +2,7 @@ using System;
 
 namespace ari
 {
-	class BoxShape : Node3D
+	public class BoxShape : Node3D
 	{
 		public TextureHandle* Texture;
 		public SubMeshHandle* SubMesh;
@@ -12,6 +12,7 @@ namespace ari
 
 		}
 
+		[CRepr]
 		struct BoxShapeMembers
 		{
 			public TextureHandle* Texture;

@@ -19,6 +19,7 @@ namespace ari
 		{
 		}
 
+		[CRepr]
 		struct CameraMembers
 		{
 			public Vector3	*	Target;
