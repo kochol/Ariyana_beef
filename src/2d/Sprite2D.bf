@@ -18,12 +18,12 @@ namespace ari
 		}
 
 		[CLink]
-		static extern Sprite2dMembers GetSprite2DMembers(void* _node);
+		static extern Sprite2dMembers GetSprite2dMembers(void* _node);
 
 		protected override void Init()
 		{
 			base.Init();
-			var m = GetSprite2DMembers(handle._obj);
+			var m = GetSprite2dMembers(handle._obj);
 			Texture = m.Texture;
 		}
 	}

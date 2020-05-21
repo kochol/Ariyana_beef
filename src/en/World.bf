@@ -63,6 +63,13 @@ namespace ari
 			return e;
 		}
 
+		public static T CreateEntity<T>() where T : Entity
+		{
+			var e = new [Friend]T(CreateEntityWorld());
+			e.Replicates = GetEntityMembers(ref e.Handle);
+			return e;
+		}
+
 		//***************************************
 		// 3D components
 		//***************************************

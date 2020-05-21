@@ -8,6 +8,12 @@ namespace ari
 		public float x;
 		public float y;
 
+		public this(float _x, float _y)
+		{
+			x = _x;
+			y = _y;
+		}
+
 		public void Set(float _x, float _y) mut
 		{
 			x = _x;
@@ -17,6 +23,11 @@ namespace ari
 		public void Set(float _v) mut
 		{
 			x = y = _v;
+		}
+
+		public static Vector2 operator * (Vector2 lhd, float rhd)
+		{
+			return Vector2(lhd.x * rhd, lhd.y * rhd);
 		}
 	}
 
