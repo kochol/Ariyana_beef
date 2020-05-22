@@ -29,6 +29,16 @@ namespace ari
 		{
 			return Vector2(lhd.x * rhd, lhd.y * rhd);
 		}
+
+		public static Vector2 operator + (Vector2 lhd, float rhd)
+		{
+			return Vector2(lhd.x + rhd, lhd.y + rhd);
+		}
+
+		public static Vector2 operator + (Vector2 lhd, Vector2 rhd)
+		{
+			return Vector2(lhd.x + rhd.x, lhd.y + rhd.y);
+		}
 	}
 
 	[CRepr]
