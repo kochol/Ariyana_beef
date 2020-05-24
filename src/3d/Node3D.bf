@@ -8,6 +8,7 @@ namespace ari
 		public uint32 Handle = uint32.MaxValue;
 		public uint32 Index = uint32.MaxValue;
 		public void* _obj = null;
+		public Entity Owner = null;
 
 		[CLink]
 		static extern bool IsValidNode3D(ref uint32 _handle);

@@ -7,6 +7,7 @@ namespace ari
 	{
 		public uint32 Handle = uint32.MaxValue;
 		public uint32 Index = uint32.MaxValue;
+		public void* _entity = null;
 
 		[CLink]
 		static extern bool IsValidEntity(ref uint32 _entityHandle);

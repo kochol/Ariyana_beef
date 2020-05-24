@@ -90,6 +90,7 @@ namespace ari
 		public void AddComponent(Entity _entity, Camera _camera)
 		{
 			AddCameraToWorld(_obj, ref _entity.Handle, _camera.[Friend]handle);
+			_camera.[Friend]handle.Owner = _entity;
 		}
 
 		[CLink]
@@ -108,6 +109,7 @@ namespace ari
 		public void AddComponent(Entity _entity, BoxShape _box)
 		{
 			AddBoxShapeToWorld(_obj, ref _entity.Handle, _box.[Friend]handle);
+			_box.[Friend]handle.Owner = _entity;
 		}
 
 		//***************************************
@@ -131,6 +133,7 @@ namespace ari
 		public void AddComponent(Entity _entity, Camera2D _cam)
 		{
 			AddCamera2dToWorld(_obj, ref _entity.Handle, _cam.[Friend]handle);
+			_cam.[Friend]handle.Owner = _entity;
 		}
 
 		[CLink]
@@ -150,6 +153,7 @@ namespace ari
 		public void AddComponent(Entity _entity, Sprite2D _cmp)
 		{
 			AddSprite2dToWorld(_obj, ref _entity.Handle, _cmp.[Friend]handle);
+			_cmp.[Friend]handle.Owner = _entity;
 		}
 
 		//***************************************

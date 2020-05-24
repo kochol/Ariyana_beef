@@ -8,6 +8,7 @@ namespace ari
 		public uint32 Handle;
 		public uint32 Index;
 		public void* _obj = null;
+		public Entity Owner = null;
 
 		[CLink]
 		static extern bool IsValidPropertyReplicator(ref uint32 _handle);
