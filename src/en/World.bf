@@ -141,6 +141,9 @@ namespace ari
 		public void RemoveComponent(Entity _entity, Camera2D _cam, bool _dispose)
 		{
 			RemoveCamera2dFromWorld(_obj, ref _entity.Handle, _cam.[Friend]handle, _dispose);
+			_cam.[Friend]handle.Owner = null;
+			if (_dispose)
+				delete _cam;
 		}
 
 		[CLink]
@@ -168,6 +171,9 @@ namespace ari
 		public void RemoveComponent(Entity _entity, Sprite2D _cmp, bool _dispose)
 		{
 			RemoveSprite2dFromWorld(_obj, ref _entity.Handle, _cmp.[Friend]handle, _dispose);
+			_cmp.[Friend]handle.Owner = null;
+			if (_dispose)
+				delete _cmp;
 		}
 
 		//***************************************
