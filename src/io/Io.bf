@@ -31,6 +31,9 @@ namespace ari
 		public static extern WindowHandle CreateAriWindow(ref WindowSetup _setup, char8* _title);
 
 		[CLink]
+		public static extern void GetWindowSize(ref WindowHandle _handle, ref int width, ref int height); 
+
+		[CLink]
 		static extern void RegisterFileSystemLink(void* _obj, char8* _scheme);
 
 		public static void RegisterFileSystem(String _scheme, FileSystemBase _fs)
