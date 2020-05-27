@@ -5,7 +5,7 @@ namespace ari
 	public class Sprite2D : Node2D
 	{
 		public TextureHandle* Texture;
-		public Quat			* Color;
+		public Color		* Color;
 
 		public this(Node2dHandle _handle) : base(_handle)
 		{
@@ -16,7 +16,7 @@ namespace ari
 		struct Sprite2dMembers
  		{
 			 public TextureHandle* Texture;
-			 public Quat		 * Color;
+			 public Color		 * Color;
 		}
 
 		[CLink]
