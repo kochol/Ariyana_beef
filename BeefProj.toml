@@ -9,5 +9,34 @@ DefaultNamespace = "ari"
 [Configs.Debug.Win64]
 CLibType = "Static"
 BeefLibType = "DynamicDebug"
-LibPaths = ["$(ProjectDir)/dist/cari.lib"]
-PostBuildCmds = ["CopyToDependents(\"$(ProjectDir)/dist/*.dll\")"]
+LibPaths = ["$(ProjectDir)/dist/win64/Debug/cari.lib"]
+PostBuildCmds = ["CopyToDependents(\"$(ProjectDir)/dist/win64/Debug/*.dll\")"]
+
+[Configs.Debug.armv7-none-linux-android21]
+BuildKind = "StaticLib"
+RelocType = "PIC"
+
+[Configs.Release.armv7-none-linux-android21]
+BuildKind = "StaticLib"
+RelocType = "PIC"
+
+[Configs.Paranoid.armv7-none-linux-android21]
+BuildKind = "StaticLib"
+RelocType = "PIC"
+
+[Configs.ServerDebug.Win64]
+CLibType = "Static"
+BeefLibType = "Static"
+LibPaths = ["$(ProjectDir)/dist/win64/ServerDebug/cari.lib"]
+PostBuildCmds = ["CopyToDependents(\"$(ProjectDir)/dist/win64/ServerDebug/*.dll\")"]
+PreprocessorMacros = ["DEBUG", "ARI_SERVER"]
+
+[Configs.ServerDebug.Win32]
+BeefLibType = "Static"
+
+[Configs.ServerDebug.armv7-none-linux-android21]
+BeefLibType = "Static"
+RelocType = "PIC"
+
+[Configs.ServerDebug.Linux64]
+BeefLibType = "Static"
