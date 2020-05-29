@@ -33,7 +33,7 @@ namespace ari
 		[CLink]
 		static extern void StopClientSystem(void* _obj);
 
-		public void StopClient()
+		public void Stop()
 		{
 			StopClientSystem(_obj);
 		}

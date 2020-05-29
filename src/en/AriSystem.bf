@@ -17,5 +17,11 @@ namespace ari
 				_obj = null;
 			}
 		}
+
+		// World call this on configure
+		protected virtual void Configure(World _world)
+		{
+
+		}
 	}
 }

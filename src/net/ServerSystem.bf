@@ -20,6 +20,44 @@ namespace ari
 		{
 			DeleteServerSystem(_obj);
 			_obj = null;
+			delete OnClientConnected;
+			delete OnClientDisconnected;
+		}
+
+		// Subscribe to client connect and disconnect
+		function void client_cb(int32 client_id, void* userData);
+
+		public delegate void OnClientConnectedDelegate(int32 client_id);
+
+		public OnClientConnectedDelegate OnClientConnected = null;
+
+		public delegate void OnClientDisconnectedDelegate(int32 client_id);
+
+		public OnClientDisconnectedDelegate OnClientDisconnected = null;
+
+		static void OnClientConnectedCb(int32 client_id, void* userData)
+		{
+			var sys = (ServerSystem)Internal.UnsafeCastToObject(userData);
+			if (sys.OnClientConnected != null)
+				sys.OnClientConnected(client_id);
+		}
+
+		static void OnClientDisconnectedCb(int32 client_id, void* userData)
+		{
+			var sys = (ServerSystem)Internal.UnsafeCastToObject(userData);
+			if (sys.OnClientDisconnected != null)
+				sys.OnClientDisconnected(client_id);
+		}
+
+		[CLink]
+		static extern void SetOnClientConnectCb(void* _obj, void* _world, void* _userData,
+			client_cb on_connect_cb, client_cb on_disconnect_cb);
+
+		protected override void Configure(World _world)
+		{
+			base.Configure(_world);
+			SetOnClientConnectCb(_obj, _world.[Friend]_obj, Internal.UnsafeCastToPtr(this),
+				 => OnClientConnectedCb, => OnClientDisconnectedCb);
 		}
 
 		[CLink]
@@ -33,7 +71,7 @@ namespace ari
 		[CLink]
 		static extern void StopServerSystem(void* _obj);
 
-		public void StopServer()
+		public void Stop()
 		{
 			StopServerSystem(_obj);
 		}

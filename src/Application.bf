@@ -17,7 +17,7 @@ namespace ari
 		static void OnInit()
 		{
 			g_app.OnInit();
-			LastTime = DateTime.UtcNow;
+			LastTime = Timer.Now();
 		}
 
 		[Export, CLink, AlwaysInclude]
@@ -29,8 +29,7 @@ namespace ari
 			Io.UpdateIo();
 
 			// calculate the elapsed time
-			float elapsed = (float)DateTime.UtcNow.Subtract(LastTime).TotalSeconds;
-			LastTime = DateTime.UtcNow;
+			float elapsed = (float)Timer.ToSeconds(Timer.LapTime(ref LastTime));
 
 			// Update the app
 			g_app.OnFrame(elapsed);
@@ -73,12 +72,15 @@ namespace ari
 			g_app.OnEvent(_event, ref _handle);
 		}
 
-		public static DateTime LastTime;
+		public static uint64 LastTime;
 
 		public static void RunApplication(Application _app)
 		{
 			FrameNumber = GetFrameNumberPointer();
 			g_app = _app;
+
+			// Init timer
+			Timer.Init();
 
 			// get the app setup configs
 			Gfx.SetupGfx(_app.GetGfxSetup());
@@ -93,7 +95,7 @@ namespace ari
 			_app.OnInit();
 
 			// get time
-			LastTime = DateTime.Now;
+			LastTime = Timer.Now();
 
 			// bind on event
 			SetOnEventCallBack(=> OnEvent);
@@ -107,11 +109,21 @@ namespace ari
 				Io.UpdateIo();
 
 				// calculate the elapsed time
-				float elapsed = (float)DateTime.Now.Subtract(LastTime).TotalSeconds;
-				LastTime = DateTime.Now;
+				double elapsed = Timer.ToSeconds(Timer.LapTime(ref LastTime));
 
 				// Update the app
-				_app.OnFrame(elapsed);
+				_app.OnFrame((float)elapsed);
+
+#if ARI_SERVER
+				// Limit the fps to 30
+				double sleepTime = 0.0333333333333333 - Timer.ToSeconds(Timer.Since(LastTime)); 
+				uint64 LastTime2 = LastTime;
+				while (sleepTime > 0)
+				{
+					System.Threading.Thread.Sleep(1);
+					sleepTime -= Timer.ToSeconds(Timer.LapTime(ref LastTime2));
+				}
+#endif
 			}
 
 			// clean up the app
