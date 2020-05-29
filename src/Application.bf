@@ -123,10 +123,6 @@ namespace ari
 					System.Threading.Thread.Sleep(1);
 					sleepTime -= Timer.ToSeconds(Timer.LapTime(ref LastTime2));
 				}
-				Console.Write(LastTime);//((uint64)(elapsed * 10000000));
-				Console.Write(" ");
-				Console.Write((int32)(elapsed * 1000));
-				Console.Write(" ");
 #endif
 			}
 
