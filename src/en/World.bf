@@ -40,6 +40,7 @@ namespace ari
 		public void AddSystem(AriSystem pSystem)
 		{
 			AddSystemToWorld(_obj, pSystem.[Friend]_obj);
+			pSystem.[Friend]Configure(this);
 		}
 
 		[CLink]
