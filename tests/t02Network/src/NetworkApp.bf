@@ -98,7 +98,7 @@ namespace t02Network
 			delete m_box;
 			delete m_pr;
 
-			m_serverSystem.StopServer();
+			m_serverSystem.Stop();
 			delete m_serverSystem;
 			Net.ShutdownNetwork();
 		}

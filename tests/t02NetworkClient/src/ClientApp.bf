@@ -60,7 +60,7 @@ namespace t02Network
 			delete m_world;
 			delete m_renderSystem;
 			delete m_sceneSystem;
-			m_clientSystem.StopClient();
+			m_clientSystem.Stop();
 			Net.ShutdownNetwork();
 			delete m_clientSystem;
 		}
