@@ -29,7 +29,14 @@ namespace ari
 		protected this(EntityHandle _handle)
 		{
 			Handle = _handle;
+		}
 
+		[CLink]
+		static extern void DeleteEntityWorld(EntityHandle _entity);
+
+		public ~this()
+		{
+			DeleteEntityWorld(Handle);
 		}
 	}
 }
