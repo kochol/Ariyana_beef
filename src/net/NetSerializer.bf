@@ -99,6 +99,7 @@ namespace ari
 				case .UInt64: return SerializeUint64(_stream, (uint64*)&c);
 				case .Float: return SerializeFloat(_stream, (float*)&c);
 				case .Double: return SerializeDouble(_stream, (double*)&c);
+				case .Enum: return SerializeBits(_stream, &c, t.Size * 8);
 				case .CharPtr:
 					char8* str = (char8*)Internal.UnsafeCastToPtr(c);
 					return SerializeString(_stream, str, String.StrLen(str));
@@ -132,6 +133,7 @@ namespace ari
 				case .UInt64: return SerializeMeasureUint64(_stream, (uint64*)&c);
 				case .Float: return SerializeMeasureFloat(_stream, (float*)&c);
 				case .Double: return SerializeMeasureDouble(_stream, (double*)&c);
+				case .Enum: return SerializeMeasureBits(_stream, &c, t.Size * 8);
 				case .CharPtr:
 					char8* str = (char8*)Internal.UnsafeCastToPtr(c);
 					return SerializeMeasureString(_stream, str, String.StrLen(str));
@@ -166,6 +168,7 @@ namespace ari
 				case .UInt64: r = DeserializeUint64(_stream, (uint64*)&c);
 				case .Float: r = DeserializeFloat(_stream, (float*)&c);
 				case .Double: r = DeserializeDouble(_stream, (double*)&c);
+				case .Enum: r = DeserializeBits(_stream, &c, t.Size * 8);
 				case .CharPtr:
 					char8* str = (char8*)Internal.UnsafeCastToPtr(c);
 					r = DeserializeString(_stream, str, String.StrLen(str));

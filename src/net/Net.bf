@@ -101,6 +101,9 @@ namespace ari
 		[CLink]
 		public static extern void ShutdownNetwork();
 
+		[CLink]
+		public static extern int32 GetLastRpcClientIndex();
+
 		public static RPC AddRPC(String _function_name, RpcType _rpc_type, RPC0.fnDel _fn, bool _reliable = false)
 		{
 			RPC0 rpc = new RPC0();
