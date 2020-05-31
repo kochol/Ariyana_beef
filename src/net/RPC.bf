@@ -64,6 +64,9 @@ namespace ari
 		{
 			RPC0 rpc = new RPC0();
 			rpc.fn = fn;
+			rpc.function_hash = function_hash;
+			rpc.Reliable = Reliable;
+			rpc.rpc_type = rpc_type;
 			return rpc;
 		}
 
@@ -110,6 +113,9 @@ namespace ari
 		{
 			RPC1<P1> rpc = new RPC1<P1>();
 			rpc.fn = fn;
+			rpc.function_hash = function_hash;
+			rpc.Reliable = Reliable;
+			rpc.rpc_type = rpc_type;
 			return rpc;
 		}
 
@@ -119,6 +125,7 @@ namespace ari
 		}
 	} // RPC1
 	
+
 	// RPC2
 	public class RPC2<P1, P2> : RPC
 	{
@@ -174,6 +181,9 @@ namespace ari
 		{
 			RPC2<P1, P2> rpc = new RPC2<P1, P2>();
 			rpc.fn = fn;
+			rpc.function_hash = function_hash;
+			rpc.Reliable = Reliable;
+			rpc.rpc_type = rpc_type;
 			return rpc;
 		}
 
@@ -250,6 +260,9 @@ namespace ari
 		{
 			RPC3<P1, P2, P3> rpc = new RPC3<P1, P2, P3>();
 			rpc.fn = fn;
+			rpc.function_hash = function_hash;
+			rpc.Reliable = Reliable;
+			rpc.rpc_type = rpc_type;
 			return rpc;
 		}
 
@@ -338,6 +351,9 @@ namespace ari
 		{
 			RPC4<P1, P2, P3, P4> rpc = new RPC4<P1, P2, P3, P4>();
 			rpc.fn = fn;
+			rpc.function_hash = function_hash;
+			rpc.Reliable = Reliable;
+			rpc.rpc_type = rpc_type;
 			return rpc;
 		}
 
@@ -438,6 +454,9 @@ namespace ari
 		{
 			RPC5<P1, P2, P3, P4, P5> rpc = new RPC5<P1, P2, P3, P4, P5>();
 			rpc.fn = fn;
+			rpc.function_hash = function_hash;
+			rpc.Reliable = Reliable;
+			rpc.rpc_type = rpc_type;
 			return rpc;
 		}
 
@@ -550,6 +569,9 @@ namespace ari
 		{
 			RPC6<P1, P2, P3, P4, P5, P6> rpc = new RPC6<P1, P2, P3, P4, P5, P6>();
 			rpc.fn = fn;
+			rpc.function_hash = function_hash;
+			rpc.Reliable = Reliable;
+			rpc.rpc_type = rpc_type;
 			return rpc;
 		}
 
@@ -674,6 +696,9 @@ namespace ari
 		{
 			RPC7<P1, P2, P3, P4, P5, P6, P7> rpc = new RPC7<P1, P2, P3, P4, P5, P6, P7>();
 			rpc.fn = fn;
+			rpc.function_hash = function_hash;
+			rpc.Reliable = Reliable;
+			rpc.rpc_type = rpc_type;
 			return rpc;
 		}
 
@@ -810,6 +835,9 @@ namespace ari
 		{
 			RPC8<P1, P2, P3, P4, P5, P6, P7, P8> rpc = new RPC8<P1, P2, P3, P4, P5, P6, P7, P8>();
 			rpc.fn = fn;
+			rpc.function_hash = function_hash;
+			rpc.Reliable = Reliable;
+			rpc.rpc_type = rpc_type;
 			return rpc;
 		}
 
@@ -958,6 +986,9 @@ namespace ari
 		{
 			RPC9<P1, P2, P3, P4, P5, P6, P7, P8, P9> rpc = new RPC9<P1, P2, P3, P4, P5, P6, P7, P8, P9>();
 			rpc.fn = fn;
+			rpc.function_hash = function_hash;
+			rpc.Reliable = Reliable;
+			rpc.rpc_type = rpc_type;
 			return rpc;
 		}
 

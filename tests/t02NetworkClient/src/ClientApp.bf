@@ -12,6 +12,7 @@ namespace t02Network
 
 		RPC m_rpc_test;
 		RPC m_rpc_test2;
+		RPC m_rpc_server;
 
 		static void RpcTest()
 		{
@@ -21,6 +22,11 @@ namespace t02Network
 		static void RpcTest2(int i)
 		{
 			Console.WriteLine("RPC Test works! {}", i);
+		}
+
+		void RpcServer(int i)
+		{
+			Console.WriteLine("RPC server works! {}", i);
 		}
 
 		public override void OnInit()
@@ -41,6 +47,7 @@ namespace t02Network
 			// Add RPCs
 			m_rpc_test = Net.AddRPC("RpcTest", RpcType.MultiCast, new => RpcTest);
 			m_rpc_test2 = Net.AddRPC<int>("RpcTest2", .MultiCast, new => RpcTest2);
+			m_rpc_server = Net.AddRPC<int>("RpcServer", .Server, new => RpcServer);
 		}
 
 		public override void OnFrame(float _elapsedTime)
@@ -49,20 +56,26 @@ namespace t02Network
 			m_world.Update(_elapsedTime);
 		}
 
+		int counter = 0;
+
 		public override void OnEvent(ari_event* _event, ref WindowHandle _handle)
 		{
 			base.OnEvent(_event, ref _handle);
+			if (_event.type == .ARI_EVENTTYPE_KEY_DOWN)
+			{
+				m_clientSystem.CallRPC(m_rpc_server, counter++);
+			}
 		}
 
 		public override void OnCleanup()
 		{
 			base.OnCleanup();
-			delete m_world;
 			delete m_renderSystem;
 			delete m_sceneSystem;
 			m_clientSystem.Stop();
 			Net.ShutdownNetwork();
 			delete m_clientSystem;
+			delete m_world;
 		}
 	}
 }

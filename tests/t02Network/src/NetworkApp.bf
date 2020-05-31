@@ -15,6 +15,7 @@ namespace t02Network
 		PropertyReplicator m_pr;
 		RPC m_rpc_test;
 		RPC m_rpc_test2;
+		RPC m_rpc_server;
 
 		static void RpcTest()
 		{
@@ -24,6 +25,11 @@ namespace t02Network
 		static void RpcTest2(int i)
 		{
 			Console.WriteLine("RPC Test works! {}", i);
+		}
+
+		void RpcServer(int i)
+		{
+			Console.WriteLine("RPC server works! {}", i);
 		}
 
 		static int test_i = 0;
@@ -67,6 +73,7 @@ namespace t02Network
 			// Add RPCs
 			m_rpc_test = Net.AddRPC("RpcTest", .MultiCast, new => RpcTest);
 			m_rpc_test2 = Net.AddRPC<int>("RpcTest2", .MultiCast, new => RpcTest2);
+			m_rpc_server = Net.AddRPC<int>("RpcServer", .Server, new => RpcServer);
 		}
 
 		public override void OnFrame(float _elapsedTime)
@@ -80,9 +87,10 @@ namespace t02Network
 		public override void OnEvent(ari_event* _event, ref WindowHandle _handle)
 		{
 			base.OnEvent(_event, ref _handle);
-			if (_event.type == ari_event_type.ARI_EVENTTYPE_KEY_UP)
+			if (_event.type == ari_event_type.ARI_EVENTTYPE_KEY_DOWN)
 			{
 				m_serverSystem.CallRPC(m_rpc_test); // Multicast test
+				m_serverSystem.CallRPC(m_rpc_test2, test_i++); // Multicast test 2
 				m_serverSystem.CallRPC(m_rpc_test2, test_i++); // Multicast test 2
 			}
 		}
@@ -90,7 +98,6 @@ namespace t02Network
 		public override void OnCleanup()
 		{
 			base.OnCleanup();
-			delete m_world;
 			delete m_renderSystem;
 			delete m_sceneSystem;
 			delete m_entity;
@@ -101,6 +108,8 @@ namespace t02Network
 			m_serverSystem.Stop();
 			delete m_serverSystem;
 			Net.ShutdownNetwork();
+
+			delete m_world;
 		}
 	}
 }

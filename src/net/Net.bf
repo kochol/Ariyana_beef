@@ -26,29 +26,33 @@ namespace ari
 			}
 		}
 
-		static Dictionary<int, RPC> g_aRpcs = new Dictionary<int, RPC>() ~ delete _;
-		static int g_rpc_index = 0;
+		static void DeleteRPC(uint32 _index)
+		{
+			NetworkSystem.[Friend]DeleteRpc(_index);
+		}
 
-		static bool SerializeRPC(void* _stream, void* _rpc)
+		static void AddRpcRef(uint32 _index)
+		{
+			NetworkSystem.[Friend]dic_rpcs[_index].refcount++;
+		}
+
+		static bool SerializeRPC(void* _stream, void* _rpc, uint32 _index)
 		{
 			RPC rpc = (RPC)Internal.UnsafeCastToObject(_rpc);
 			NetSerializer.Serialize(_stream, rpc.function_hash);
 			return rpc.Serialize(_stream);
 		}
 
-		static bool SerializeMeasureRPC(void* _stream, void* _rpc)
+		static bool SerializeMeasureRPC(void* _stream, void* _rpc, uint32 _index)
 		{
 			RPC rpc = (RPC)Internal.UnsafeCastToObject(_rpc);
 			NetSerializer.SerializeMeasure(_stream, rpc.function_hash);
 			return rpc.SerializeMeasure(_stream);
 		}
 
-		static bool DerializeRPC(void* _stream, out int _index)
+		static bool DerializeRPC(void* _stream, out uint32 _index)
 		{
 			uint32 rpc_hash = 0;
-
-			_index = g_rpc_index;
-			g_rpc_index++;
 
 			NetSerializer.Deserialize(_stream, ref rpc_hash);
 
@@ -56,29 +60,29 @@ namespace ari
 				return false;
 
 			RPC orig_rpc = g_dRpcs[rpc_hash];
-			RPC rpc = orig_rpc.Clone();
+			RPC rpc = NetworkSystem.[Friend]GetRpcClone(orig_rpc, out _index);
 			if (!rpc.Deserialize(_stream))
 			{
-				delete rpc;
+				NetworkSystem.[Friend]DeleteRpc(_index);
 				return false;
 			}
 
-			g_aRpcs.Add(_index, rpc);
+			Console.Write(_index);
+			Console.WriteLine(orig_rpc.function_name);
+
 			return true;
 		}
 
-		static void Call_RPC(int rpc_index)
+		static void Call_RPC(uint32 rpc_index)
 		{
-			Runtime.Assert(g_aRpcs.ContainsKey(rpc_index));
-			RPC rpc = g_aRpcs[rpc_index];
+			Console.WriteLine(rpc_index);
+			RPC rpc = NetworkSystem.[Friend]GetRpc(rpc_index);
 			rpc.Call();
-			g_aRpcs.Remove(rpc_index);
-			delete rpc;
 		}
 
-		function bool serialize_cb(void* _stream, void* _rpc);
-		function bool deserialize_cb(void* _stream, out int _index);
-		function void call_rpc_cb(int rpc_index);
+		function bool serialize_cb(void* _stream, void* _rpc, uint32 _index);
+		function bool deserialize_cb(void* _stream, out uint32 _index);
+		function void call_rpc_cb(uint32 rpc_index);
 
 		[CLink]
 		public static extern bool InitNetworkLink
@@ -86,7 +90,9 @@ namespace ari
 				serialize_cb _on_serialize, 
 				deserialize_cb _on_deserialize, 
 				serialize_cb _on_serialize_measure,
-				call_rpc_cb _on_call_rpc
+				call_rpc_cb _on_call_rpc,
+				call_rpc_cb _on_delete_rpc,
+				call_rpc_cb _on_add_ref_rpc
 			);
 
 		public static bool InitNetwork()
@@ -95,7 +101,9 @@ namespace ari
 				(=> SerializeRPC,
 				=> DerializeRPC,
 				=> SerializeMeasureRPC,
-				=> Call_RPC);
+				=> Call_RPC,
+				=> DeleteRPC,
+				=> AddRpcRef);
 		}	
 		
 		[CLink]

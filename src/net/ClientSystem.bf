@@ -39,11 +39,11 @@ namespace ari
 		}
 
 		[CLink]
-		static extern void CallCRPCClientSystem(void* _obj, void* _rpc, bool _reliable, RpcType _rpc_type);
+		static extern void CallCRPCClientSystem(void* _obj, void* _rpc, bool _reliable, uint32 _index, RpcType _rpc_type);
 
-		protected override void SendRPC(RPC _rpc, int client_index)
+		protected override void SendRPC(RPC _rpc, uint32 _index, int client_index)
 		{
-			CallCRPCClientSystem(_obj, Internal.UnsafeCastToPtr(_rpc), _rpc.Reliable, _rpc.rpc_type);
+			CallCRPCClientSystem(_obj, Internal.UnsafeCastToPtr(_rpc), _rpc.Reliable, _index, _rpc.rpc_type);
 		}
 	}
 }

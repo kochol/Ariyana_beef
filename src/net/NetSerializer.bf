@@ -90,9 +90,9 @@ namespace ari
 				case .Char16: return SerializeBits(_stream, &c, 16);
 				case .Int16: return SerializeBits(_stream, &c, 16);
 				case .UInt16: return SerializeBits(_stream, &c, 16);
-				case .Int: return SerializeBits(_stream, &c, 32);
-				case .Char32: return SerializeBits(_stream, &c, 32);
-				case .Int32: return SerializeBits(_stream, &c, 32);
+				case .Int: return SerializeUint32(_stream, (uint32*)&c);
+				case .Char32: return SerializeUint32(_stream, (uint32*)&c);
+				case .Int32: return SerializeUint32(_stream, (uint32*)&c);
 				case .UInt: return SerializeUint32(_stream, (uint32*)&c);
 				case .UInt32: return SerializeUint32(_stream, (uint32*)&c);
 				case .Int64: return SerializeUint64(_stream, (uint64*)&c);
@@ -124,9 +124,9 @@ namespace ari
 				case .Char16: return SerializeMeasureBits(_stream, &c, 16);
 				case .Int16: return SerializeMeasureBits(_stream, &c, 16);
 				case .UInt16: return SerializeMeasureBits(_stream, &c, 16);
-				case .Int: return SerializeMeasureBits(_stream, &c, 32);
-				case .Char32: return SerializeMeasureBits(_stream, &c, 32);
-				case .Int32: return SerializeMeasureBits(_stream, &c, 32);
+				case .Int: return SerializeMeasureUint32(_stream, (uint32*)&c);
+				case .Char32: return SerializeMeasureUint32(_stream, (uint32*)&c);
+				case .Int32: return SerializeMeasureUint32(_stream, (uint32*)&c);
 				case .UInt: return SerializeMeasureUint32(_stream, (uint32*)&c);
 				case .UInt32: return SerializeMeasureUint32(_stream, (uint32*)&c);
 				case .Int64: return SerializeMeasureUint64(_stream, (uint64*)&c);
@@ -159,9 +159,9 @@ namespace ari
 				case .Char16: r = DeserializeBits(_stream, &c, 16);
 				case .Int16: r = DeserializeBits(_stream, &c, 16);
 				case .UInt16: r = DeserializeBits(_stream, &c, 16);
-				case .Int: r = DeserializeBits(_stream, &c, 32);
-				case .Char32: r = DeserializeBits(_stream, &c, 32);
-				case .Int32: r = DeserializeBits(_stream, &c, 32);
+				case .Int: r = DeserializeUint32(_stream, (uint32*)&c);
+				case .Char32: r = DeserializeUint32(_stream, (uint32*)&c);
+				case .Int32: r = DeserializeUint32(_stream, (uint32*)&c);
 				case .UInt: r = DeserializeUint32(_stream, (uint32*)&c);
 				case .UInt32: r = DeserializeUint32(_stream, (uint32*)&c);
 				case .Int64: r = DeserializeUint64(_stream, (uint64*)&c);
