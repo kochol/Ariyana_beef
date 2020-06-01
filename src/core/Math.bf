@@ -95,4 +95,15 @@ namespace ari
 			a = _a;
 		}
 	}
+
+	[CRepr]
+	public struct Rect<T>
+	{
+		public T x;
+		public T y;
+		public T width;
+		public T height;
+	}
+
+	typealias RectI = Rect<int32>;
 }

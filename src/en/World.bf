@@ -177,6 +177,36 @@ namespace ari
 				delete _cmp;
 		}
 
+		[CLink]
+		static extern Node2dHandle CreateCanvasComponent();
+
+		public static Canvas CreateCanvas()
+		{
+			var node2d = new Canvas(CreateCanvasComponent());
+			node2d.[Friend]Init();
+			return node2d;
+		}
+
+		[CLink]
+		static extern void AddCanvasToWorld(void* _world, ref EntityHandle _entity, Node2dHandle _node2d);
+
+		public void AddComponent(Entity _entity, Canvas _cmp)
+		{
+			AddCanvasToWorld(_obj, ref _entity.Handle, _cmp.[Friend]handle);
+			_cmp.[Friend]handle.Owner = _entity;
+		}
+
+		[CLink]
+		static extern void RemoveCanvasFromWorld(void* _world, ref EntityHandle _entity, Node2dHandle _node, bool _dispose);
+
+		public void RemoveComponent(Entity _entity, Canvas _cmp, bool _dispose)
+		{
+			RemoveCanvasFromWorld(_obj, ref _entity.Handle, _cmp.[Friend]handle, _dispose);
+			_cmp.[Friend]handle.Owner = null;
+			if (_dispose)
+				delete _cmp;
+		}
+
 		//***************************************
 		// Net components
 		//***************************************
