@@ -21,12 +21,12 @@ namespace ari
 		}
 	}
 
-	public class Entity
+	public class Entity: Node
 	{
 		public bool* Replicates;
 		public EntityHandle Handle;
 
-		protected this(EntityHandle _handle)
+		protected this(EntityHandle _handle): base(_handle._entity)
 		{
 			Handle = _handle;
 		}

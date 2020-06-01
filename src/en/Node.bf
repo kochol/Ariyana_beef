@@ -38,5 +38,22 @@ namespace ari
 		{
 			delete _name;
 		}
+
+		[CLink]
+		static extern void NodeAddChild(void* _node, void* _child);
+
+		public void AddChild(Node _child)
+		{
+			NodeAddChild(_obj, _child._obj);
+		}
+
+		[CLink]
+		static extern void NodeRemoveChild(void* _node, void* _child);
+
+		public void RemoveChild(Node _child)
+		{
+			NodeRemoveChild(_obj, _child._obj);
+		}
+
 	}
 }
