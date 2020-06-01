@@ -68,5 +68,31 @@ namespace ari
 		public float y;
 		public float z;
 		public float w;
+
+		public this(float _x, float _y, float _z, float _w)
+		{
+			x = _x;
+			y = _y;
+			z = _z;
+			w = _w;
+		}
+
+	}
+
+	[CRepr]
+	public struct Color
+	{
+		public float r;
+		public float g;
+		public float b;
+		public float a;
+
+		public this(float _r, float _g, float _b, float _a)
+		{
+			r = _r;
+			g = _g;
+			b = _b;
+			a = _a;
+		}
 	}
 }
