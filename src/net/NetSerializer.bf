@@ -84,22 +84,27 @@ namespace ari
 			switch (t.[Friend]mTypeCode)
 			{
 				case .Boolean: return SerializeBool(_stream, (bool*)&c);
+
 				case .Char8, .Int8, .UInt8: return SerializeBits(_stream, &c, 8);
+
 				case .Char16, .Int16, .UInt16: return SerializeBits(_stream, &c, 16);
-				case .Int: return SerializeUint32(_stream, (uint32*)&c);
-				case .Char32: return SerializeUint32(_stream, (uint32*)&c);
-				case .Int32: return SerializeUint32(_stream, (uint32*)&c);
-				case .UInt: return SerializeUint32(_stream, (uint32*)&c);
-				case .UInt32: return SerializeUint32(_stream, (uint32*)&c);
-				case .Int64: return SerializeUint64(_stream, (uint64*)&c);
-				case .UInt64: return SerializeUint64(_stream, (uint64*)&c);
+
+				case .Int, .Char32, .Int32, .UInt, .UInt32: return SerializeUint32(_stream, (uint32*)&c);
+
+				case .Int64, .UInt64: return SerializeUint64(_stream, (uint64*)&c);
+
 				case .Float: return SerializeFloat(_stream, (float*)&c);
+
 				case .Double: return SerializeDouble(_stream, (double*)&c);
+
 				case .Enum: return SerializeBits(_stream, &c, t.Size * 8);
+
 				case .CharPtr:
 					char8* str = (char8*)Internal.UnsafeCastToPtr(c);
 					return SerializeString(_stream, str, String.StrLen(str));
+
 				case .Struct: return SerializeBytes(_stream, Internal.UnsafeCastToPtr(c), t.Size);
+
 				default:
 				Runtime.Assert(false, "Unsupported type: ");
 			}
@@ -114,26 +119,27 @@ namespace ari
 			switch (t.[Friend]mTypeCode)
 			{
 				case .Boolean: return SerializeMeasureBool(_stream, (bool*)&c);
-				case .Char8: return SerializeMeasureBits(_stream, &c, 8);
-				case .Int8: return SerializeMeasureBits(_stream, &c, 8);
-				case .UInt8: return SerializeMeasureBits(_stream, &c, 8);
-				case .Char16: return SerializeMeasureBits(_stream, &c, 16);
-				case .Int16: return SerializeMeasureBits(_stream, &c, 16);
-				case .UInt16: return SerializeMeasureBits(_stream, &c, 16);
-				case .Int: return SerializeMeasureUint32(_stream, (uint32*)&c);
-				case .Char32: return SerializeMeasureUint32(_stream, (uint32*)&c);
-				case .Int32: return SerializeMeasureUint32(_stream, (uint32*)&c);
-				case .UInt: return SerializeMeasureUint32(_stream, (uint32*)&c);
-				case .UInt32: return SerializeMeasureUint32(_stream, (uint32*)&c);
-				case .Int64: return SerializeMeasureUint64(_stream, (uint64*)&c);
-				case .UInt64: return SerializeMeasureUint64(_stream, (uint64*)&c);
+
+				case .Char8, .Int8, .UInt8: return SerializeMeasureBits(_stream, &c, 8);
+				
+				case .Char16, .Int16, .UInt16: return SerializeMeasureBits(_stream, &c, 16);
+
+				case .Int, .Char32, .Int32, .UInt, .UInt32: return SerializeMeasureUint32(_stream, (uint32*)&c);
+				
+				case .Int64, .UInt64: return SerializeMeasureUint64(_stream, (uint64*)&c);
+
 				case .Float: return SerializeMeasureFloat(_stream, (float*)&c);
+
 				case .Double: return SerializeMeasureDouble(_stream, (double*)&c);
+
 				case .Enum: return SerializeMeasureBits(_stream, &c, t.Size * 8);
+
 				case .CharPtr:
 					char8* str = (char8*)Internal.UnsafeCastToPtr(c);
 					return SerializeMeasureString(_stream, str, String.StrLen(str));
+
 				case .Struct: return SerializeMeasureBytes(_stream, Internal.UnsafeCastToPtr(c), t.Size);
+
 				default:
 				Runtime.Assert(false, "Unsupported type: ");
 			}
@@ -149,26 +155,27 @@ namespace ari
 			switch (t.[Friend]mTypeCode)
 			{
 				case .Boolean: r = DeserializeBool(_stream, (bool*)&c);
-				case .Char8:r = DeserializeBits(_stream, &c, 8);
-				case .Int8: r = DeserializeBits(_stream, &c, 8);
-				case .UInt8: r = DeserializeBits(_stream, &c, 8);
-				case .Char16: r = DeserializeBits(_stream, &c, 16);
-				case .Int16: r = DeserializeBits(_stream, &c, 16);
-				case .UInt16: r = DeserializeBits(_stream, &c, 16);
-				case .Int: r = DeserializeUint32(_stream, (uint32*)&c);
-				case .Char32: r = DeserializeUint32(_stream, (uint32*)&c);
-				case .Int32: r = DeserializeUint32(_stream, (uint32*)&c);
-				case .UInt: r = DeserializeUint32(_stream, (uint32*)&c);
-				case .UInt32: r = DeserializeUint32(_stream, (uint32*)&c);
-				case .Int64: r = DeserializeUint64(_stream, (uint64*)&c);
-				case .UInt64: r = DeserializeUint64(_stream, (uint64*)&c);
+
+				case .Char8, .Int8, .UInt8:r = DeserializeBits(_stream, &c, 8);
+				
+				case .Char16, .Int16, .UInt16: r = DeserializeBits(_stream, &c, 16);
+				
+				case .Int, .Char32, .Int32, .UInt, .UInt32: r = DeserializeUint32(_stream, (uint32*)&c);
+				
+				case .Int64,.UInt64: r = DeserializeUint64(_stream, (uint64*)&c);
+
 				case .Float: r = DeserializeFloat(_stream, (float*)&c);
+
 				case .Double: r = DeserializeDouble(_stream, (double*)&c);
+
 				case .Enum: r = DeserializeBits(_stream, &c, t.Size * 8);
+
 				case .CharPtr:
 					char8* str = (char8*)Internal.UnsafeCastToPtr(c);
 					r = DeserializeString(_stream, str, String.StrLen(str));
+
 				case .Struct: r = DeserializeBytes(_stream, Internal.UnsafeCastToPtr(c), t.Size);
+
 				default:
 				Runtime.Assert(false, "Unsupported type: ");
 			}
