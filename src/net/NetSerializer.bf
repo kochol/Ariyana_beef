@@ -84,12 +84,8 @@ namespace ari
 			switch (t.[Friend]mTypeCode)
 			{
 				case .Boolean: return SerializeBool(_stream, (bool*)&c);
-				case .Char8: return SerializeBits(_stream, &c, 8);
-				case .Int8: return SerializeBits(_stream, &c, 8);
-				case .UInt8: return SerializeBits(_stream, &c, 8);
-				case .Char16: return SerializeBits(_stream, &c, 16);
-				case .Int16: return SerializeBits(_stream, &c, 16);
-				case .UInt16: return SerializeBits(_stream, &c, 16);
+				case .Char8, .Int8, .UInt8: return SerializeBits(_stream, &c, 8);
+				case .Char16, .Int16, .UInt16: return SerializeBits(_stream, &c, 16);
 				case .Int: return SerializeUint32(_stream, (uint32*)&c);
 				case .Char32: return SerializeUint32(_stream, (uint32*)&c);
 				case .Int32: return SerializeUint32(_stream, (uint32*)&c);
