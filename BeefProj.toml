@@ -16,6 +16,9 @@ PostBuildCmds = ["CopyToDependents(\"$(ProjectDir)/dist/win64/Debug/*.dll\")"]
 BuildKind = "StaticLib"
 RelocType = "PIC"
 
+[Configs.Debug.Linux64]
+LibPaths = ["$(ProjectDir)/dist/linux64/ServerDebug/libcari.so"]
+
 [Configs.Release.armv7-none-linux-android21]
 BuildKind = "StaticLib"
 RelocType = "PIC"
@@ -39,4 +42,8 @@ BeefLibType = "Static"
 RelocType = "PIC"
 
 [Configs.ServerDebug.Linux64]
+OtherLinkFlags = "$(LinkFlags) cari"
 BeefLibType = "Static"
+LibPaths = ["$(ProjectDir)/dist/linux64/ServerDebug"]
+PostBuildCmds = ["CopyToDependents(\"$(ProjectDir)/dist/linux64/ServerDebug/*.so\")"]
+PreprocessorMacros = ["DEBUG", "ARI_SERVER"]
