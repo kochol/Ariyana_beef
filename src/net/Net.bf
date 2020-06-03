@@ -67,15 +67,11 @@ namespace ari
 				return false;
 			}
 
-			Console.Write(_index);
-			Console.WriteLine(orig_rpc.function_name);
-
 			return true;
 		}
 
 		static void Call_RPC(uint32 rpc_index)
 		{
-			Console.WriteLine(rpc_index);
 			RPC rpc = NetworkSystem.[Friend]GetRpc(rpc_index);
 			rpc.Call();
 		}
