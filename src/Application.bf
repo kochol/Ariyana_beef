@@ -115,8 +115,8 @@ namespace ari
 				_app.OnFrame((float)elapsed);
 
 #if ARI_SERVER
-				// Limit the fps to 30
-				double sleepTime = 0.0333333333333333 - Timer.ToSeconds(Timer.Since(LastTime)); 
+				// Limit the fps to 60
+				double sleepTime = 0.0166666667 - Timer.ToSeconds(Timer.Since(LastTime)); 
 				uint64 LastTime2 = LastTime;
 				while (sleepTime > 0)
 				{
