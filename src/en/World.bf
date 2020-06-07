@@ -49,6 +49,7 @@ namespace ari
 		public void AddEntity(Entity _entity)
 		{
 			AddEntityToWorld(_obj, ref _entity.Handle);
+			_entity.[Friend]world = this;
 		}
 
 		[CLink]

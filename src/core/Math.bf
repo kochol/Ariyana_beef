@@ -62,6 +62,28 @@ namespace ari
 	}
 
 	[CRepr]
+	public struct Vector4
+	{
+		public float x;
+		public float y;
+		public float z;
+		public float w;
+
+		public void Set(float _x, float _y, float _z, float _w) mut
+		{
+			x = _x;
+			y = _y;
+			z = _z;
+			w = _w;
+		}
+
+		public void Set(float _v) mut
+		{
+			x = y = z = w = _v;
+		}
+	}
+
+	[CRepr]
 	public struct Quat
 	{
 		public float x;

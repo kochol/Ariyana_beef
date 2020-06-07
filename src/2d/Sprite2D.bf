@@ -6,6 +6,7 @@ namespace ari
 	{
 		public TextureHandle* Texture;
 		public Color		* Color;
+		public Vector4		* UV;
 
 		public this(Node2dHandle _handle) : base(_handle)
 		{
@@ -15,8 +16,9 @@ namespace ari
 		[CRepr]
 		struct Sprite2dMembers
  		{
-			 public TextureHandle* Texture;
-			 public Color		 * Color;
+			 public TextureHandle	* Texture;
+			 public Color		 	* Color;
+			 public Vector4			* UV;
 		}
 
 		[CLink]
@@ -25,9 +27,10 @@ namespace ari
 		protected override void Init()
 		{
 			base.Init();
-			var m = GetSprite2dMembers(handle._obj);
+			var m 	= GetSprite2dMembers(handle._obj);
 			Texture = m.Texture;
 			Color   = m.Color;
+			UV 		= m.UV;
 		}
 	}
 }

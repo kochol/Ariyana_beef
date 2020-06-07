@@ -25,6 +25,7 @@ namespace ari
 	{
 		public bool* Replicates;
 		public EntityHandle Handle;
+		protected World world = null;
 
 		protected this(EntityHandle _handle): base(_handle._entity)
 		{
