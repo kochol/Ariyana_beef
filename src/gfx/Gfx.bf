@@ -53,5 +53,8 @@ namespace ari
 
 		[CLink]
 		public static extern TextureHandle LoadTexture(char8* path);
+
+		[CLink]
+		public static extern void SetClearColor(ref Color _color);
 	}
 }
