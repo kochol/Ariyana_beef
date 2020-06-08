@@ -195,11 +195,11 @@ namespace ari
 	    public float mouse_y = 0.0f;
 	    public float scroll_x = 0.0f;
 	    public float scroll_y = 0.0f;
-	    public int num_touches = 0;
+	    public int32 num_touches = 0;
 	    public ari_touchpoint[ARI_MAX_TOUCHPOINTS] touches = .(.(), .(), .(), .(), .(), .(), .(), .());
-	    public int window_width = 0;
-	    public int window_height = 0;
-	    public int framebuffer_width = 0;
-	    public int framebuffer_height = 0;
+	    public int32 window_width = 0;
+	    public int32 window_height = 0;
+	    public int32 framebuffer_width = 0;
+	    public int32 framebuffer_height = 0;
 	}
 }
