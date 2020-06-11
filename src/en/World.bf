@@ -159,20 +159,20 @@ namespace ari
 		}
 
 		[CLink]
-		static extern void AddSprite2dToWorld(void* _world, ref EntityHandle _entity, Node2dHandle _node2d);
+		static extern void AddSprite2dToWorld(void* _world, ref EntityHandle _entity, ref Node2dHandle _node2d);
 
 		public void AddComponent(Entity _entity, Sprite2D _cmp)
 		{
-			AddSprite2dToWorld(_obj, ref _entity.Handle, _cmp.[Friend]handle);
+			AddSprite2dToWorld(_obj, ref _entity.Handle, ref _cmp.[Friend]handle);
 			_cmp.[Friend]handle.Owner = _entity;
 		}
 
 		[CLink]
-		static extern void RemoveSprite2dFromWorld(void* _world, ref EntityHandle _entity, Node2dHandle _node, bool _dispose);
+		static extern void RemoveSprite2dFromWorld(void* _world, ref EntityHandle _entity, ref Node2dHandle _node, bool _dispose);
 
 		public void RemoveComponent(Entity _entity, Sprite2D _cmp, bool _dispose)
 		{
-			RemoveSprite2dFromWorld(_obj, ref _entity.Handle, _cmp.[Friend]handle, _dispose);
+			RemoveSprite2dFromWorld(_obj, ref _entity.Handle, ref _cmp.[Friend]handle, _dispose);
 			_cmp.[Friend]handle.Owner = null;
 			if (_dispose)
 				delete _cmp;
@@ -189,20 +189,20 @@ namespace ari
 		}
 
 		[CLink]
-		static extern void AddCanvasToWorld(void* _world, ref EntityHandle _entity, Node2dHandle _node2d);
+		static extern void AddCanvasToWorld(void* _world, ref EntityHandle _entity, ref Node2dHandle _node2d);
 
 		public void AddComponent(Entity _entity, Canvas _cmp)
 		{
-			AddCanvasToWorld(_obj, ref _entity.Handle, _cmp.[Friend]handle);
+			AddCanvasToWorld(_obj, ref _entity.Handle, ref _cmp.[Friend]handle);
 			_cmp.[Friend]handle.Owner = _entity;
 		}
 
 		[CLink]
-		static extern void RemoveCanvasFromWorld(void* _world, ref EntityHandle _entity, Node2dHandle _node, bool _dispose);
+		static extern void RemoveCanvasFromWorld(void* _world, ref EntityHandle _entity, ref Node2dHandle _node, bool _dispose);
 
 		public void RemoveComponent(Entity _entity, Canvas _cmp, bool _dispose)
 		{
-			RemoveCanvasFromWorld(_obj, ref _entity.Handle, _cmp.[Friend]handle, _dispose);
+			RemoveCanvasFromWorld(_obj, ref _entity.Handle, ref _cmp.[Friend]handle, _dispose);
 			_cmp.[Friend]handle.Owner = null;
 			if (_dispose)
 				delete _cmp;
