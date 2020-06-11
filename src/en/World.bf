@@ -129,20 +129,20 @@ namespace ari
 		}
 
 		[CLink]
-		static extern void AddCamera2dToWorld(void* _world, ref EntityHandle _entity, Node2dHandle _camera);
+		static extern void AddCamera2dToWorld(void* _world, ref EntityHandle _entity, ref Node2dHandle _camera);
 
 		public void AddComponent(Entity _entity, Camera2D _cam)
 		{
-			AddCamera2dToWorld(_obj, ref _entity.Handle, _cam.[Friend]handle);
+			AddCamera2dToWorld(_obj, ref _entity.Handle, ref _cam.[Friend]handle);
 			_cam.[Friend]handle.Owner = _entity;
 		}
 
 		[CLink]
-		static extern void RemoveCamera2dFromWorld(void* _world, ref EntityHandle _entity, Node2dHandle _camera, bool _dispose);
+		static extern void RemoveCamera2dFromWorld(void* _world, ref EntityHandle _entity, ref Node2dHandle _camera, bool _dispose);
 
 		public void RemoveComponent(Entity _entity, Camera2D _cam, bool _dispose)
 		{
-			RemoveCamera2dFromWorld(_obj, ref _entity.Handle, _cam.[Friend]handle, _dispose);
+			RemoveCamera2dFromWorld(_obj, ref _entity.Handle, ref _cam.[Friend]handle, _dispose);
 			_cam.[Friend]handle.Owner = null;
 			if (_dispose)
 				delete _cam;

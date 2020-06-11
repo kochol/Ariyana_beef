@@ -33,11 +33,11 @@ namespace ari
 		}
 
 		[CLink]
-		static extern void DeleteEntityWorld(EntityHandle _entity);
+		static extern void DeleteEntityWorld(ref EntityHandle _entity);
 
 		public ~this()
 		{
-			DeleteEntityWorld(Handle);
+			DeleteEntityWorld(ref Handle);
 		}
 	}
 }
